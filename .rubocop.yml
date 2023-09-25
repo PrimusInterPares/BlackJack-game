@@ -1,0 +1,39 @@
+AllCops:
+  RubyInterpreters:
+    - ruby
+
+Lint/Debugger:
+  Enabled: true
+
+Metrics/AbcSize:
+  Max: 45
+
+Metrics/BlockLength:
+  Max: 40
+
+Metrics/BlockNesting:
+  Max: 4
+
+Metrics/CyclomaticComplexity:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/PerceivedComplexity:
+  Max: 12
+
+Style/ClassVars:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/GuardClause:
+  Enabled: true
