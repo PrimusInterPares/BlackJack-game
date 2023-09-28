@@ -3,7 +3,7 @@
 require_relative 'card'
 
 class Deck
-  attr_accessor :cards
+  attr_reader :cards
 
   def initialize(empty)
     @cards = []
@@ -26,4 +26,8 @@ class Deck
   def take_out_card
     @cards.shift
   end
+
+  private
+
+  attr_writer :cards
 end
