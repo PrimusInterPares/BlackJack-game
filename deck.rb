@@ -20,7 +20,7 @@ class Deck
   # rubocop:enable Style/GuardClause
 
   def add_card(card)
-    @cards.push(card)
+    @cards.push(card) if card.instance_of?(Card)
   end
 
   def take_out_card
