@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Card
-  attr_accessor :suit, :rank, :value
+  attr_reader :suit, :rank, :value
 
   SUITS = %W[\u2660 \u2665 \u2663 \u2666].freeze
   RANKS = {
@@ -25,4 +25,8 @@ class Card
     @rank = rank.to_s
     @value = value.to_i
   end
+
+  private
+
+  attr_writer :suit, :rank, :value
 end
