@@ -19,7 +19,9 @@ class Player
   end
 
   def request_card(number, dealer)
-    number.times { deck.add_card(dealer.give_card) }
+    return unless dealer.instance_of?(Dealer)
+
+    number.times { deck.add_card!(dealer.give_card) }
     @score = count_score
   end
 
