@@ -15,7 +15,7 @@ class Player
   end
 
   def make_bet(bet_size)
-    @account -= bet_size unless (@account - bet_size).negative?
+    @account -= bet_size unless (account - bet_size).negative?
   end
 
   def request_card(number, dealer)
@@ -26,7 +26,7 @@ class Player
   end
 
   def count_cards
-    deck.length
+    deck.cards.length
   end
 
   def increase_account(amount)
@@ -38,11 +38,11 @@ class Player
   attr_writer :name, :account, :deck, :score
 
   def count_score
-    return 0 if @deck.empty?
+    return 0 if deck.cards.empty?
 
     score = 0
     count_aces = 0
-    @deck.cards.each do |card|
+    deck.cards.each do |card|
       count_aces += 1 if card.rank == 'T'
       score += if (card.rank == 'T') && (count_aces > 1)
                  1
