@@ -8,7 +8,6 @@ class Deck
   def initialize(empty)
     @cards = []
 
-    # rubocop:disable Style/GuardClause
     if empty.zero?
       Card::SUITS.each do |suit|
         Card::RANKS.each do |rank, value|
@@ -16,8 +15,9 @@ class Deck
         end
       end
     end
+
+    shuffle!
   end
-  # rubocop:enable Style/GuardClause
 
   def add_card!(card)
     @cards.push(card) if card.instance_of?(Card)

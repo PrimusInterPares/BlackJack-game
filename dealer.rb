@@ -11,7 +11,6 @@ class Dealer < Player
     super
     @name = DEFAULT_NAME
     @game_deck = Deck.new(0)
-    @game_deck.shuffle_deck!
   end
 
   def give_card
@@ -21,8 +20,4 @@ class Dealer < Player
   private
 
   attr_writer :game_deck
-
-  def shuffle_deck!
-    @game_deck.shuffle!
-  end
 end
