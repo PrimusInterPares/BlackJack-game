@@ -92,7 +92,7 @@ class Game
       when 'N'
         return false
       else
-        puts 'Please, enter correct choice.'
+        display_incorrect_choice
       end
     end
   end

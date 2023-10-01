@@ -75,6 +75,10 @@ module Interface
       puts DASHED_LINE
     end
 
+    def display_incorrect_choice
+      puts 'Please, enter correct choice.'
+    end
+
     private
 
     def clear_screen
