@@ -130,7 +130,7 @@ class Game
   end
 
   def dealer_turn
-    dealer.request_card(1, dealer) if dealer.score < 17
+    dealer.request_card(1, dealer) if dealer.score < 17 && dealer.count_cards == 2
   end
 
   def reset_game
