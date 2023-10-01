@@ -17,6 +17,10 @@ class Dealer < Player
     @game_deck.take_out_card!
   end
 
+  def take_new_deck
+    @game_deck = Deck.new(0)
+  end
+
   private
 
   attr_writer :game_deck
