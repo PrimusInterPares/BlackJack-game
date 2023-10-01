@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 module Interface
-  DASHED_LINE = '---------------------------'
-  DEALER_DECK = '* * *'
-
   def self.included(base)
     base.extend ClassMethods
     base.include InstanceMethods
@@ -13,28 +10,36 @@ module Interface
   end
 
   module InstanceMethods
-    DASHED_LINE = '------------------------'
+    DASHED_LINE = '-----------------------------------'
     DEALER_DECK = '* * *'
 
     def display_hello_message
-      puts '#' * 14
-      puts 'BLACKJACK GAME'
-      puts '#' * 14
+      puts '#' * 26
+      puts '      BLACKJACK GAME'
+      puts '#' * 26
       print "\nPlease, enter your name: "
     end
 
-    def display_round(game, player)
+    def display_round(game)
       puts DASHED_LINE
       display_dealer_name
-      display_dealer_deck
+      display_dealer_deck_hidden(game.dealer)
       puts ''
       display_bank(game.bank)
       puts ''
-      display_player_name(player.name)
-      display_player_score(player.score)
-      display_player_account(player.account)
-      display_player_deck(player.deck)
+      display_player_stats(game.player)
       puts DASHED_LINE
+    end
+
+    def display_final_desk(game)
+      puts DASHED_LINE
+      display_dealer_name
+      display_dealer_score(game.dealer.score)
+      display_dealer_deck(game.dealer)
+      puts ''
+      display_bank(game.bank)
+      puts ''
+      display_player_stats(game.player)
     end
 
     def display_tie
@@ -43,15 +48,9 @@ module Interface
       puts DASHED_LINE
     end
 
-    def display_winner(name, prize)
+    def display_winner(winner, bank)
       puts DASHED_LINE
-      puts "#{name} wins and gets #{prize}$!"
-      puts DASHED_LINE
-    end
-
-    def display_loser(name, prize)
-      puts DASHED_LINE
-      puts "#{name} loses! Dealer gets #{prize}!"
+      puts "#{winner.name} wins and gets #{bank}$!"
       puts DASHED_LINE
     end
 
@@ -76,26 +75,46 @@ module Interface
       puts DASHED_LINE
     end
 
+    private
+
     def clear_screen
       system('clear') || system('cls')
     end
-
-    private
 
     def display_dealer_name
       puts 'Dealer'
     end
 
-    def display_dealer_deck
-      puts DEALER_DECK
+    def display_dealer_deck(dealer)
+      output = ''
+      dealer.deck.cards.each do |card|
+        output += "#{card.rank}#{card.suit} "
+      end
+      puts "Cards: #{output}"
+    end
+
+    def display_dealer_deck_hidden(dealer)
+      count_cards = dealer.count_cards
+      count_cards.times { print '* ' }
+    end
+
+    def display_dealer_score(score)
+      puts "Score: #{score}"
     end
 
     def display_bank(amount)
       puts "\tBank: #{amount}$"
     end
 
+    def display_player_stats(player)
+      display_player_name(player.name)
+      display_player_score(player.score)
+      display_player_account(player.account)
+      display_player_deck(player.deck)
+    end
+
     def display_player_score(score)
-      puts "Your score: #{score}"
+      puts "Score: #{score}"
     end
 
     def display_player_name(name)
@@ -103,7 +122,7 @@ module Interface
     end
 
     def display_player_account(account)
-      puts "Your account: #{account}$"
+      puts "Account: #{account}$"
     end
 
     def display_player_deck(deck)
@@ -111,7 +130,7 @@ module Interface
       deck.cards.each do |card|
         output += "#{card.rank}#{card.suit} "
       end
-      puts "Your cards: #{output}"
+      puts "Cards: #{output}"
     end
   end
 end
