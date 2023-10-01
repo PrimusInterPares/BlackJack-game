@@ -33,6 +33,10 @@ class Player
     @account += amount
   end
 
+  def clear_hand
+    @deck = Deck.new(1)
+  end
+
   private
 
   attr_writer :name, :account, :deck, :score
